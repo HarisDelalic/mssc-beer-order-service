@@ -20,7 +20,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
+import org.springframework.boot.context.event.SpringApplicationEvent;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import java.sql.Timestamp;
@@ -37,11 +40,12 @@ public class BeerOrderLine extends BaseEntity {
 
     @Builder
     public BeerOrderLine(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate,
-                         BeerOrder beerOrder, UUID beerId, Integer orderQuantity,
+                         BeerOrder beerOrder, UUID beerId, String upc, Integer orderQuantity,
                          Integer quantityAllocated) {
         super(id, version, createdDate, lastModifiedDate);
         this.beerOrder = beerOrder;
         this.beerId = beerId;
+        this.upc = upc;
         this.orderQuantity = orderQuantity;
         this.quantityAllocated = quantityAllocated;
     }
@@ -49,7 +53,14 @@ public class BeerOrderLine extends BaseEntity {
     @ManyToOne
     private BeerOrder beerOrder;
 
+    private String upc;
+
+//    Use any of the following two linest to prevent
+//    org.h2.jdbc.JdbcSQLDataException: Hexadecimal string contains non-hex character: "0a818933-087d-47f2-ad83-2f986ed087eb";
+    @Type(type="org.hibernate.type.UUIDCharType")
+//    @Column(length = 36, columnDefinition = "varchar", updatable = false, nullable = false )
     private UUID beerId;
+
     private Integer orderQuantity = 0;
     private Integer quantityAllocated = 0;
 }
