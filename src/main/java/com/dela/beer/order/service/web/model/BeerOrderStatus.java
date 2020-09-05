@@ -15,9 +15,9 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.dela.beer.order.service.domain;
+package com.dela.beer.order.service.web.model;
 
-public enum BeerOrderStatusEnum {
+public enum BeerOrderStatus {
     NEW,
     VALIDATED,
     VALIDATION_EXCEPTION,
