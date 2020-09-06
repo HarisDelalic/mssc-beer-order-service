@@ -4,7 +4,7 @@ import com.dela.brewery.models.BeerOrderDto;
 import com.dela.msscbeerorderservice.domain.BeerOrder;
 import com.dela.msscbeerorderservice.domain.BeerOrderEvent;
 import com.dela.msscbeerorderservice.domain.BeerOrderStatus;
-import com.dela.msscbeerorderservice.interceptors.BeerOrderInterceptor;
+import com.dela.msscbeerorderservice.sm.interceptors.BeerOrderInterceptor;
 import com.dela.msscbeerorderservice.repositories.BeerOrderRepository;
 import com.dela.msscbeerorderservice.web.mappers.BeerOrderMapper;
 import lombok.RequiredArgsConstructor;

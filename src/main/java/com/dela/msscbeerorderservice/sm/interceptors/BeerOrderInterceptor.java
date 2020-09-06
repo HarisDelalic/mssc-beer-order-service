@@ -1,4 +1,4 @@
-package com.dela.msscbeerorderservice.interceptors;
+package com.dela.msscbeerorderservice.sm.interceptors;
 
 import com.dela.msscbeerorderservice.domain.BeerOrder;
 import com.dela.msscbeerorderservice.domain.BeerOrderEvent;
