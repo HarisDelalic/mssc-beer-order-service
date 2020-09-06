@@ -1,6 +1,6 @@
 package com.dela.msscbeerorderservice.services;
 
-import com.dela.brewery.models.BeerOrderDto;
+import com.dela.brewery.models.beer_order.BeerOrderDto;
 import com.dela.msscbeerorderservice.domain.BeerOrder;
 import com.dela.msscbeerorderservice.domain.BeerOrderEvent;
 import com.dela.msscbeerorderservice.domain.BeerOrderStatus;
@@ -35,6 +35,16 @@ public class BeerOrderManagerImpl implements BeerOrderManager {
         sendEvent(savedBeerOrder, BeerOrderEvent.VALIDATE_ORDER);
 
         return beerOrderMapper.beerOrderToDto(savedBeerOrder);
+    }
+
+    @Override
+    public void failValidation(BeerOrderDto beerOrderDto) {
+        sendEvent(beerOrderMapper.dtoToBeerOrder(beerOrderDto), BeerOrderEvent.VALIDATION_FAILED);
+    }
+
+    @Override
+    public void passValidation(BeerOrderDto beerOrderDto) {
+        sendEvent(beerOrderMapper.dtoToBeerOrder(beerOrderDto), BeerOrderEvent.VALIDATION_PASSED);
     }
 
     private void sendEvent(BeerOrder beerOrder, BeerOrderEvent event) {

@@ -1,7 +1,7 @@
 package com.dela.msscbeerorderservice.web.mappers;
 
 import com.dela.msscbeerorderservice.domain.BeerOrderLine;
-import com.dela.brewery.models.BeerOrderLineDto;
+import com.dela.brewery.models.beer_order.BeerOrderLineDto;
 import org.mapstruct.DecoratedWith;
 import org.mapstruct.Mapper;
 

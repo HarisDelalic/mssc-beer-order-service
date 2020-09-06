@@ -18,8 +18,8 @@
 package com.dela.msscbeerorderservice.services;
 
 
-import com.dela.brewery.models.BeerOrderDto;
-import com.dela.brewery.models.BeerOrderPagedList;
+import com.dela.brewery.models.beer_order.BeerOrderDto;
+import com.dela.brewery.models.beer_order.BeerOrderPagedList;
 import org.springframework.data.domain.Pageable;
 
 import java.util.UUID;

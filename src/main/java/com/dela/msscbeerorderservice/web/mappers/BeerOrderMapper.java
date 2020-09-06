@@ -18,7 +18,7 @@
 package com.dela.msscbeerorderservice.web.mappers;
 
 import com.dela.msscbeerorderservice.domain.BeerOrder;
-import com.dela.brewery.models.BeerOrderDto;
+import com.dela.brewery.models.beer_order.BeerOrderDto;
 import org.mapstruct.Mapper;
 
 @Mapper(uses = {DateMapper.class, BeerOrderLineMapper.class})

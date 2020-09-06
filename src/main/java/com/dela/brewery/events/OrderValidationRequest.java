@@ -1,6 +1,6 @@
 package com.dela.brewery.events;
 
-import com.dela.brewery.models.BeerOrderDto;
+import com.dela.brewery.models.beer_order.BeerOrderDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

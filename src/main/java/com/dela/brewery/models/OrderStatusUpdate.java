@@ -17,6 +17,7 @@
 
 package com.dela.brewery.models;
 
+import com.dela.brewery.models.beer_order.BaseItem;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

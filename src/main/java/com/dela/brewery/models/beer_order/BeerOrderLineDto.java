@@ -15,8 +15,9 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.dela.brewery.models;
+package com.dela.brewery.models.beer_order;
 
+import com.dela.brewery.models.BeerStyleEnum;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

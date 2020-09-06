@@ -18,8 +18,8 @@
 package com.dela.msscbeerorderservice.web.controllers;
 
 import com.dela.msscbeerorderservice.services.BeerOrderService;
-import com.dela.brewery.models.BeerOrderDto;
-import com.dela.brewery.models.BeerOrderPagedList;
+import com.dela.brewery.models.beer_order.BeerOrderDto;
+import com.dela.brewery.models.beer_order.BeerOrderPagedList;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

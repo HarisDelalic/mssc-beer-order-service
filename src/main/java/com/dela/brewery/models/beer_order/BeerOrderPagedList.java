@@ -15,7 +15,7 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.dela.brewery.models;
+package com.dela.brewery.models.beer_order;
 
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;

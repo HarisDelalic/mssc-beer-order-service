@@ -2,7 +2,7 @@ package com.dela.msscbeerorderservice.web.mappers;
 
 import com.dela.msscbeerorderservice.domain.BeerOrderLine;
 import com.dela.msscbeerorderservice.services.BeerService;
-import com.dela.brewery.models.BeerOrderLineDto;
+import com.dela.brewery.models.beer_order.BeerOrderLineDto;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class BeerOrderLineMapperDecorator implements BeerOrderLineMapper {

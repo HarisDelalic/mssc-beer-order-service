@@ -1,7 +1,7 @@
 package com.dela.msscbeerorderservice.sm.actions;
 
 import com.dela.brewery.events.OrderValidationRequest;
-import com.dela.brewery.models.BeerOrderDto;
+import com.dela.brewery.models.beer_order.BeerOrderDto;
 import com.dela.msscbeerorderservice.config.JmsConfig;
 import com.dela.msscbeerorderservice.domain.BeerOrderEvent;
 import com.dela.msscbeerorderservice.repositories.BeerOrderRepository;
