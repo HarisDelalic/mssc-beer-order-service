@@ -10,7 +10,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Data
 @Builder
-public class ValidateOrderRequest implements Serializable {
+public class OrderValidationRequest implements Serializable {
 
     private static long serialVersionUID = -8152665195502943379L;
 

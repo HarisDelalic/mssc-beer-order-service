@@ -1,6 +1,6 @@
 package com.dela.msscbeerorderservice.sm.actions;
 
-import com.dela.brewery.events.ValidateOrderRequest;
+import com.dela.brewery.events.OrderValidationRequest;
 import com.dela.brewery.models.BeerOrderDto;
 import com.dela.msscbeerorderservice.config.JmsConfig;
 import com.dela.msscbeerorderservice.domain.BeerOrderEvent;
@@ -37,7 +37,7 @@ public class ValidateOrderAction implements Action {
 
                     jmsTemplate.convertAndSend(
                             JmsConfig.VALIDATE_ORDER_REQUEST_QUEUE,
-                            new ValidateOrderRequest(beerOrderDto)
+                            new OrderValidationRequest(beerOrderDto)
                     );
                 });
 
