@@ -4,6 +4,7 @@ import com.dela.brewery.models.BeerOrderDto;
 import com.dela.msscbeerorderservice.domain.BeerOrder;
 import com.dela.msscbeerorderservice.domain.BeerOrderEvent;
 import com.dela.msscbeerorderservice.domain.BeerOrderStatus;
+import com.dela.msscbeerorderservice.interceptors.BeerOrderInterceptor;
 import com.dela.msscbeerorderservice.repositories.BeerOrderRepository;
 import com.dela.msscbeerorderservice.web.mappers.BeerOrderMapper;
 import lombok.RequiredArgsConstructor;
@@ -14,16 +15,15 @@ import org.springframework.statemachine.config.StateMachineFactory;
 import org.springframework.statemachine.support.DefaultStateMachineContext;
 import org.springframework.stereotype.Service;
 
-//import org.springframework.messaging.support.MessageBuilder;
-
 @RequiredArgsConstructor
 @Service
 public class BeerOrderManagerImpl implements BeerOrderManager {
-    private static final String beerOrderID = "beer-order-id";
+    public static final String BEER_ORDER_ID = "beer-order-id";
 
     private final BeerOrderRepository beerOrderRepository;
     private final BeerOrderMapper beerOrderMapper;
     private final StateMachineFactory<BeerOrderStatus, BeerOrderEvent> stateMachineFactory;
+    private final BeerOrderInterceptor beerOrderInterceptor;
 
     @Override
     public BeerOrderDto newBeerOrder(BeerOrderDto beerOrderDto) {
@@ -32,37 +32,41 @@ public class BeerOrderManagerImpl implements BeerOrderManager {
 
         BeerOrder savedBeerOrder = beerOrderRepository.save(beerOrder);
 
-        sendEvent(beerOrderDto, BeerOrderEvent.VALIDATE_ORDER);
+        sendEvent(savedBeerOrder, BeerOrderEvent.VALIDATE_ORDER);
 
         return beerOrderMapper.beerOrderToDto(savedBeerOrder);
     }
 
-    private void sendEvent(BeerOrderDto beerOrderDto, BeerOrderEvent event) {
-        StateMachine<BeerOrderStatus, BeerOrderEvent> sm = build(beerOrderDto);
+    private void sendEvent(BeerOrder beerOrder, BeerOrderEvent event) {
+        StateMachine<BeerOrderStatus, BeerOrderEvent> sm = build(beerOrder);
 
         Message<BeerOrderEvent> message = MessageBuilder
                 .withPayload(event)
-                .setHeader(beerOrderID, beerOrderDto.getId())
+                .setHeader(BEER_ORDER_ID, beerOrder.getId())
                 .build();
 
         sm.sendEvent(message);
     }
 
-    private StateMachine<BeerOrderStatus, BeerOrderEvent> build(BeerOrderDto beerOrderDto) {
+    private StateMachine<BeerOrderStatus, BeerOrderEvent> build(BeerOrder beerOrder) {
 
-        StateMachine<BeerOrderStatus, BeerOrderEvent> sm = stateMachineFactory.getStateMachine(beerOrderDto.getId());
+        StateMachine<BeerOrderStatus, BeerOrderEvent> sm = stateMachineFactory.getStateMachine(beerOrder.getId());
 
         sm.stop();
 
         sm.getStateMachineAccessor()
+
                 .doWithAllRegions(sma -> {
+                    sma.addStateMachineInterceptor(beerOrderInterceptor);
                     sma.resetStateMachine
                             (new DefaultStateMachineContext<BeerOrderStatus, BeerOrderEvent>
-                                    (BeerOrderStatus.valueOf(beerOrderDto.getOrderStatus()),
+                                    (beerOrder.getOrderStatus(),
                                             null,
                                             null,
                                             null));
                 });
+
+
 
         sm.start();
 
