@@ -14,6 +14,7 @@ import org.springframework.statemachine.StateMachine;
 import org.springframework.statemachine.config.StateMachineFactory;
 import org.springframework.statemachine.support.DefaultStateMachineContext;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
@@ -37,11 +38,13 @@ public class BeerOrderManagerImpl implements BeerOrderManager {
         return beerOrderMapper.beerOrderToDto(savedBeerOrder);
     }
 
+    @Transactional
     @Override
     public void failValidation(BeerOrderDto beerOrderDto) {
         sendEvent(beerOrderMapper.dtoToBeerOrder(beerOrderDto), BeerOrderEvent.VALIDATION_FAILED);
     }
 
+    @Transactional
     @Override
     public void passValidation(BeerOrderDto beerOrderDto) {
         sendEvent(beerOrderMapper.dtoToBeerOrder(beerOrderDto), BeerOrderEvent.VALIDATION_PASSED);

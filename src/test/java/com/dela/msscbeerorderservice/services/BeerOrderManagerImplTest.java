@@ -67,7 +67,7 @@ class BeerOrderManagerImplTest {
         beerOrderManager.passValidation(beerOrderMapper.beerOrderToDto(savedBeerOrder));
 
         beerOrderRepository.findById(savedBeerOrder.getId()).ifPresent(border ->
-                assertEquals(BeerOrderStatus.VALIDATED, border.getOrderStatus()));
+                assertEquals(BeerOrderStatus.ALLOCATION_PENDING, border.getOrderStatus()));
 
     }
 }
