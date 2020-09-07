@@ -45,6 +45,10 @@ public class BeerOrderManagerImpl implements BeerOrderManager {
     @Override
     public void passValidation(BeerOrderDto beerOrderDto) {
         sendEvent(beerOrderMapper.dtoToBeerOrder(beerOrderDto), BeerOrderEvent.VALIDATION_PASSED);
+
+        BeerOrder validatedBeerOrder = beerOrderRepository.findOneById(beerOrderDto.getId());
+
+        sendEvent(validatedBeerOrder, BeerOrderEvent.ALLOCATE_ORDER);
     }
 
     private void sendEvent(BeerOrder beerOrder, BeerOrderEvent event) {
