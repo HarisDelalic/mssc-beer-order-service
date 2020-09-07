@@ -12,7 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class JmsConfig {
     public static final String VALIDATE_ORDER_REQUEST_QUEUE = "validate-order";
     public static final String VALIDATE_ORDER_RESULT_QUEUE = "validate-order-result";
-    public static final String ALLOCATE_ORDER_QUEUE = "allocate-order";
+    public static final String ALLOCATE_ORDER_REQUEST_QUEUE = "allocate-order-request";
+    public static final String ALLOCATE_ORDER_RESPONSE_QUEUE = "allocate-order-response";
 
     @Transactional
     @Bean // Serialize message content to json using TextMessage

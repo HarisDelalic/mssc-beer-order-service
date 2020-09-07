@@ -54,6 +54,22 @@ public class BeerOrderManagerImpl implements BeerOrderManager {
         sendEvent(validatedBeerOrder, BeerOrderEvent.ALLOCATE_ORDER);
     }
 
+    @Override
+    public void passAllocation(BeerOrderDto beerOrderDto) {
+        sendEvent(beerOrderMapper.dtoToBeerOrder(beerOrderDto), BeerOrderEvent.ALLOCATION_SUCCESS);
+    }
+
+    @Override
+    public void failAllocationWithException(BeerOrderDto beerOrderDto) {
+        sendEvent(beerOrderMapper.dtoToBeerOrder(beerOrderDto), BeerOrderEvent.ALLOCATION_FAILED);
+    }
+
+    @Override
+    public void failAllocationNoInventory(BeerOrderDto beerOrderDto) {
+        sendEvent(beerOrderMapper.dtoToBeerOrder(beerOrderDto), BeerOrderEvent.ALLOCATION_NO_INVENTORY);
+
+    }
+
     private void sendEvent(BeerOrder beerOrder, BeerOrderEvent event) {
         StateMachine<BeerOrderStatus, BeerOrderEvent> sm = build(beerOrder);
 
