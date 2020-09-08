@@ -11,8 +11,8 @@ import java.util.Optional;
 @Service
 @ConfigurationProperties(value = "com.dela", ignoreUnknownFields = false)
 public class BeerServiceImpl implements BeerService {
-    private final String BEER_BY_UPC_API = "/api/v1/beers/beerUpc/";
-    private final String BEER_BY_UUID_API = "/api/v1/beers/";
+    public static final String BEER_BY_UPC_API = "/api/v1/beers/beerUpc/";
+    public static final String BEER_BY_UUID_API = "/api/v1/beers/";
 
     private final RestTemplate restTemplate;
     private String beerServiceHostApi;

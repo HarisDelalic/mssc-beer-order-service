@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.jms.support.converter.MessageType;
-import org.springframework.transaction.annotation.Transactional;
 
 @Configuration
 public class JmsConfig {
@@ -15,9 +14,8 @@ public class JmsConfig {
     public static final String ALLOCATE_ORDER_REQUEST_QUEUE = "allocate-order-request";
     public static final String ALLOCATE_ORDER_RESPONSE_QUEUE = "allocate-order-response";
 
-    @Transactional
     @Bean // Serialize message content to json using TextMessage
-    public MessageConverter getConverter(ObjectMapper objectMapper) {
+    public MessageConverter jacksonJmsMessageConverter(ObjectMapper objectMapper) {
         MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
         converter.setTargetType(MessageType.TEXT);
         converter.setTypeIdPropertyName("_type");

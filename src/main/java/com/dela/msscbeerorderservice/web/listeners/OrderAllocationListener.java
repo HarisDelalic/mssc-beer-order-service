@@ -1,6 +1,6 @@
 package com.dela.msscbeerorderservice.web.listeners;
 
-import com.dela.brewery.models.OrderAllocationResponse;
+import com.dela.brewery.events.OrderAllocationResponse;
 import com.dela.brewery.models.beer_order.BeerOrderDto;
 import com.dela.msscbeerorderservice.config.JmsConfig;
 import com.dela.msscbeerorderservice.services.BeerOrderManager;
@@ -17,9 +17,9 @@ public class OrderAllocationListener {
     public void listenForAllocationResponse(OrderAllocationResponse orderAllocationResponse) {
         BeerOrderDto beerOrderDto = orderAllocationResponse.getBeerOrderDto();
 
-        if(orderAllocationResponse.isError()) {
+        if(orderAllocationResponse.getError()) {
             beerOrderManager.failAllocationWithException(beerOrderDto);
-        } else if(orderAllocationResponse.isPendingInventory()) {
+        } else if(orderAllocationResponse.getPendingInventory()) {
             beerOrderManager.failAllocationNoInventory(beerOrderDto);
         } else {
             beerOrderManager.passAllocation(beerOrderDto);

@@ -1,6 +1,6 @@
 package com.dela.msscbeerorderservice.sm.actions;
 
-import com.dela.brewery.events.AllocateOrderRequest;
+import com.dela.brewery.events.OrderAllocationRequest;
 import com.dela.msscbeerorderservice.config.JmsConfig;
 import com.dela.msscbeerorderservice.domain.BeerOrder;
 import com.dela.msscbeerorderservice.domain.BeerOrderEvent;
@@ -38,7 +38,7 @@ public class AllocateOrderAction implements Action<BeerOrderStatus, BeerOrderEve
 
         beerOrderOptional.ifPresentOrElse(beerOrder -> {
             jmsTemplate.convertAndSend(JmsConfig.ALLOCATE_ORDER_REQUEST_QUEUE,
-                    AllocateOrderRequest.builder()
+                    OrderAllocationRequest.builder()
                             .beerOrderDto(beerOrderMapper.beerOrderToDto(beerOrder))
                             .build());
             log.debug("Sent Allocation Request for order id: " + beerOrderId);
